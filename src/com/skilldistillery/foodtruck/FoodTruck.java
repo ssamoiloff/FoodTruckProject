@@ -42,9 +42,8 @@ public class FoodTruck {
 	}
 	@Override
 	public String toString() {
-		return "Truck " + getId() + ": " + getTruckName() + "\nType of food: " + getFoodType() + "\nRating: "
-				+ getRating();
+		return "\tTruck " + getId() + ":\t" + getTruckName() + "\n\tType of food:\t"
+				+ getFoodType() + "\n\tRating:\t" + getRating();
 	}
-	
 	
 }

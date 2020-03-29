@@ -2,9 +2,12 @@
 
 ### Overview
 
-### Technologies UsedJava
+### Technologies Used
+- Java SE13
 - Eclipse
+- Atom
 - MacOS Terminal
 - GitHub/Git
 
 ### Lessons Learned
+* 
