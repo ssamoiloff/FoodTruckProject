@@ -1,34 +1,37 @@
 package com.skilldistillery.foodtruck;
 
 public class FoodTruck {
-
-	private static String[] truckName = {"Aiberto's Tacos", "Tony's Hot Dogs", "Old Oak Oven",
-										"Krusty's 'Rona Burger", "Samurai Sushi"};
-	private static String[] foodType = {"Burritos", "Ballpark Franks", "Sicilian Pizza",
-										"Bat Burgers", "Japanese Cuisine"};
-	private int uniqueID;
+	private String truckName;
+	private String foodType;
 	private int rating;
+	private int id;
 	
 	public FoodTruck() {
+//		uniqueID = ;
 	}
-	public FoodTruck(int uniqueID) {
-		this.uniqueID = uniqueID;
+	public FoodTruck(String truckName) {
+		this.truckName = truckName;
 	}
-	public FoodTruck(int uniqueID, int rating) {
-		this.uniqueID = uniqueID;
+	public FoodTruck(String truckName, String foodType) {
+		this.truckName = truckName;
+		this.foodType = foodType;
+	}
+	public FoodTruck(String truckName, String foodType, int rating) {
+		this.truckName = truckName;
+		this.foodType = foodType;
 		this.rating = rating;
 	}
-	public static String[] getTruckName() {
+	public String getTruckName() {
 		return truckName;
 	}
-	public static String[] getFoodType() {
+	public void setTruckName(String truckName) {
+		this.truckName = truckName;
+	}
+	public String getFoodType() {
 		return foodType;
 	}
-	public int getUniqueID() {
-		return uniqueID;
-	}
-	public void setUniqueID(int uniqueID) {
-		this.uniqueID = uniqueID;
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
 	}
 	public int getRating() {
 		return rating;
@@ -36,6 +39,17 @@ public class FoodTruck {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int uniqueID) {
+		this.id = uniqueID;
+	}
+	@Override
+	public String toString() {
+		return "Truck " + getId() + ": " + getTruckName() + "\nType of food: " + getFoodType() + "\nRating: "
+				+ getRating();
+	}
 	
-		
+	
 }
