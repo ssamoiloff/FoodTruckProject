@@ -9,18 +9,17 @@ public class FoodTruckApplication {
 
 	public static void main(String[] args) {
 		FoodTruckApplication f = new FoodTruckApplication();
-		FoodTruck a = new FoodTruck("Krusty Anus", "Literal shit", 1);
-		
-		System.out.println(a);
-		
-//		f.run();
+	
+		f.run();
 	}
 
 	public void run() {
 		printBanner();
 		inputInfo();
-
-		printMenu();
+		for (int i = 0; i < trucksArr.length; i++) {
+			System.out.println(trucksArr[i].toString());
+		}
+//		printMenu();
 
 		kb.close();
 	}
@@ -48,12 +47,13 @@ public class FoodTruckApplication {
 			if (numOfTrucks > 5 || numOfTrucks == 0) {
 				System.err.println("Please enter a value between 1-5");
 			} else {
+				trucksArr = new FoodTruck[numOfTrucks];
 				isValid = false;
 			}
 		}
 
-		for (int i = 1; i <= numOfTrucks; i++) {
-			System.out.print("Enter name of truck #" + i + " (type \"quit\" to finish): ");
+		for (int i = 0; i < numOfTrucks; i++) {
+			System.out.print("Enter name of truck #" + (i+1) + " (type \"quit\" to finish): ");
 			kb.nextLine(); // had issues with two lines printing on the same line
 			name = kb.nextLine();
 			if (name.equals("quit")) {
@@ -61,9 +61,9 @@ public class FoodTruckApplication {
 			}
 			System.out.print("Enter type of food: ");
 			food = kb.nextLine();
-			System.out.print("Enter truck #" + i + " rating: ");
+			System.out.print("Enter truck #" + (i+1) + " rating: ");
 			rating = kb.nextInt();
-
+			trucksArr[i] = new FoodTruck(name, food, rating);
 		}
 
 	}

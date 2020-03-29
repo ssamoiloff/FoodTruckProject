@@ -1,25 +1,20 @@
 package com.skilldistillery.foodtruck;
 
 public class FoodTruck {
+	private static int id = 1;
+	private int uniqueId;
 	private String truckName;
 	private String foodType;
 	private int rating;
-	private int id;
 	
 	public FoodTruck() {
-//		uniqueID = ;
-	}
-	public FoodTruck(String truckName) {
-		this.truckName = truckName;
-	}
-	public FoodTruck(String truckName, String foodType) {
-		this.truckName = truckName;
-		this.foodType = foodType;
 	}
 	public FoodTruck(String truckName, String foodType, int rating) {
 		this.truckName = truckName;
 		this.foodType = foodType;
 		this.rating = rating;
+		uniqueId = id;
+		id++;
 	}
 	public String getTruckName() {
 		return truckName;
@@ -40,10 +35,10 @@ public class FoodTruck {
 		this.rating = rating;
 	}
 	public int getId() {
-		return id;
+		return uniqueId;
 	}
-	public void setId(int uniqueID) {
-		this.id = uniqueID;
+	public void setId(int _id) {
+		uniqueId = _id;
 	}
 	@Override
 	public String toString() {
