@@ -11,7 +11,7 @@ public class FoodTruckApplication {
 	public static void main(String[] args) {
 		FoodTruckApplication f = new FoodTruckApplication();
 
-		f.run();
+		f.run(); // Starts app
 	}
 
 	public void run() {
@@ -23,6 +23,7 @@ public class FoodTruckApplication {
 		kb.close();
 	}
 
+//	First thing you see
 	public void printBanner() {
 		System.out.println(" _______________________________________________ ");
 		System.out.println("|***********************************************|");
@@ -35,12 +36,13 @@ public class FoodTruckApplication {
 		System.out.println();
 	}
 
+//	Get initial data
 	public void inputInfo() {
 		boolean isValid = true;
 		String name = null;
 		String food = null;
 		double rating = 0.0;
-		System.out.print("How many trucks would you like info on? [1-5]: ");
+		System.out.print("How many trucks would you like to input? [1-5]: ");
 		while (isValid) {
 			numOfTrucks = kb.nextInt();
 			System.out.println();
@@ -54,33 +56,50 @@ public class FoodTruckApplication {
 
 		for (int i = 0; i < numOfTrucks; i++) {
 			System.out.print("Enter the name of truck #" + (i + 1) + " (type \"quit\" to finish): ");
-			kb.nextLine(); // had issues with two lines printing on the same line
+			kb.nextLine();
 			name = kb.nextLine();
 			if (name.equals("quit")) {
 				break;
 			}
 			System.out.print("Enter type of food: ");
 			food = kb.nextLine();
-			System.out.print("Enter truck #" + (i + 1) + " rating: ");
+			System.out.print("Enter truck #" + (i + 1) + " rating (1-5): ");
 			rating = kb.nextDouble();
+			while (rating < 1.0 || rating > 5.0) {
+				System.out.println();
+				System.out.println("*** Ratings are on a scale of 1-5 ***\n");
+				System.out.print("Enter truck #" + (i + 1) + " rating (1-5): ");
+				rating = kb.nextDouble();
+			}
+
 			trucksArr[i] = new FoodTruck(name, food, rating);
 			System.out.println();
 		}
 
 	}
-	
+
+//	Calculates average rating and stores it in avgRating
 	public void calcAvg() {
 		double average = 0.0;
+		int counter = 0;
 		for (int i = 0; i < numOfTrucks; i++) {
+			if (trucksArr[i] == null) {
+				break;
+			}
 			average += trucksArr[i].getRating();
+			counter++;
 		}
-		avgRating = average / numOfTrucks;
+		avgRating = average / counter;
 	}
-	
+
+//	Finds highest rated food truck
 	public int getHighest() {
 		double highestRating = trucksArr[0].getRating();
 		int highestID = trucksArr[0].getId();
 		for (int i = 0; i < numOfTrucks; i++) {
+			if (trucksArr[i] == null) {
+				break;
+			}
 			double currentRating = trucksArr[i].getRating();
 			int currentID = trucksArr[i].getId();
 			if (highestRating < currentRating) {
@@ -88,9 +107,10 @@ public class FoodTruckApplication {
 				highestID = currentID;
 			}
 		}
-		return highestID-1;
+		return highestID - 1;
 	}
 
+//	Prints out user menu after initial data input
 	public void printMenu() {
 		System.out.println();
 		System.out.print("\t\t");
@@ -102,6 +122,7 @@ public class FoodTruckApplication {
 		System.out.println();
 	}
 
+//	Loops menu until exit condition
 	public void menuSelect() {
 		int selection = 0;
 		while (selection != 4) {
@@ -112,20 +133,25 @@ public class FoodTruckApplication {
 			switch (selection) {
 			case 1:
 				for (int i = 0; i < trucksArr.length; i++) {
-					System.out.println(trucksArr[i].toString());
-					System.out.println("\t---------------------------");
+					if (trucksArr[i] == null) {
+						break;
+					} else {
+						System.out.println(trucksArr[i].toString());
+						System.out.println("\t---------------------------");
+					}
 				}
 				break;
-			
+
 			case 2:
 				calcAvg();
 				System.out.println("\tAverage Rating: " + avgRating);
 				break;
-			
+
 			case 3:
-				System.out.println("\tHighest Rated Food Truck: " + trucksArr[getHighest()].getTruckName());
+				System.out.println("\tHighest Rated Food Truck:\n");
+				System.out.println(trucksArr[getHighest()].toString());
 				break;
-				
+
 			case 4:
 				System.out.println();
 				System.out.println("\t\tThanks for using my app!");
