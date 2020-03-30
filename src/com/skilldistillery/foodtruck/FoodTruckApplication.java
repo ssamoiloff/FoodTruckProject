@@ -16,8 +16,9 @@ public class FoodTruckApplication {
 
 	public void run() {
 
-//		printBanner();
-//		inputInfo();
+		printBanner();
+		inputInfo();
+		menuSelect();
 
 		kb.close();
 	}
@@ -38,10 +39,11 @@ public class FoodTruckApplication {
 		boolean isValid = true;
 		String name = null;
 		String food = null;
-		int rating = 0;
+		double rating = 0.0;
 		System.out.print("How many trucks would you like info on? [1-5]: ");
 		while (isValid) {
 			numOfTrucks = kb.nextInt();
+			System.out.println();
 			if (numOfTrucks > 5 || numOfTrucks == 0) {
 				System.err.println("Please enter a value between 1-5");
 			} else {
@@ -60,8 +62,9 @@ public class FoodTruckApplication {
 			System.out.print("Enter type of food: ");
 			food = kb.nextLine();
 			System.out.print("Enter truck #" + (i + 1) + " rating: ");
-			rating = kb.nextInt();
+			rating = kb.nextDouble();
 			trucksArr[i] = new FoodTruck(name, food, rating);
+			System.out.println();
 		}
 
 	}
@@ -72,6 +75,20 @@ public class FoodTruckApplication {
 			average += trucksArr[i].getRating();
 		}
 		avgRating = average / numOfTrucks;
+	}
+	
+	public int getHighest() {
+		double highestRating = trucksArr[0].getRating();
+		int highestID = trucksArr[0].getId();
+		for (int i = 0; i < numOfTrucks; i++) {
+			double currentRating = trucksArr[i].getRating();
+			int currentID = trucksArr[i].getId();
+			if (highestRating < currentRating) {
+				highestRating = currentRating;
+				highestID = currentID;
+			}
+		}
+		return highestID-1;
 	}
 
 	public void printMenu() {
@@ -96,10 +113,24 @@ public class FoodTruckApplication {
 			case 1:
 				for (int i = 0; i < trucksArr.length; i++) {
 					System.out.println(trucksArr[i].toString());
+					System.out.println("\t---------------------------");
 				}
+				break;
+			
 			case 2:
-				System.out.println(avgRating);
+				calcAvg();
+				System.out.println("\tAverage Rating: " + avgRating);
+				break;
+			
 			case 3:
+				System.out.println("\tHighest Rated Food Truck: " + trucksArr[getHighest()].getTruckName());
+				break;
+				
+			case 4:
+				System.out.println();
+				System.out.println("\t\tThanks for using my app!");
+				System.out.println("\t\t\tGoodbye!");
+				System.exit(0);
 			}
 		}
 	}

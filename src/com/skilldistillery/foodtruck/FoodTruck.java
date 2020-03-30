@@ -3,13 +3,13 @@ package com.skilldistillery.foodtruck;
 public class FoodTruck {
 	private static int id = 1;
 	private int uniqueId;
-	private String truckName;
-	private String foodType;
-	private int rating;
+	private String truckName = "???";
+	private String foodType = "???";
+	private double rating = 0.0;
 	
 	public FoodTruck() {
 	}
-	public FoodTruck(String truckName, String foodType, int rating) {
+	public FoodTruck(String truckName, String foodType, double rating) {
 		this.truckName = truckName;
 		this.foodType = foodType;
 		this.rating = rating;
@@ -28,7 +28,7 @@ public class FoodTruck {
 	public void setFoodType(String foodType) {
 		this.foodType = foodType;
 	}
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 	public void setRating(int rating) {
@@ -42,8 +42,8 @@ public class FoodTruck {
 	}
 	@Override
 	public String toString() {
-		return "\tTruck " + getId() + ":\t" + getTruckName() + "\n\tType of food:\t"
-				+ getFoodType() + "\n\tRating:\t" + getRating();
+		return "\tTruck #" + getId() + ":\t" + getTruckName() + "\n\tType of food:\t"
+				+ getFoodType() + "\n\tRating:\t\t" + getRating();
 	}
 	
 }
